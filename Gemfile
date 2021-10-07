@@ -33,3 +33,12 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'pry-rails'
+
+gem 'ddtrace', '0.49.0'
+gem 'dogstatsd-ruby', '5.0.1'
+
+gem 'redis-namespace', '~> 1.6'
+gem 'resque', '1.27.4', require: 'resque/server'
+gem 'resque-scheduler', '4.3.1'
