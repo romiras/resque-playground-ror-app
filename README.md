@@ -1,24 +1,29 @@
-# README
+# resque-playground-ror-app
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a RoR application playground for Resque jobs.
 
-Things you may want to cover:
+## Send StatsD metrics
 
-* Ruby version
+Open terminal and run it to listen for StatsD (Ctrl-C to terminate it):
 
-* System dependencies
+```bash
+nc -u -l 127.0.0.1 8125
+```
 
-* Configuration
+Open another terminal in root of project and run a Resque worker:
 
-* Database creation
+```bash
+QUEUE=foofoo bin/rails resque:work
+```
 
-* Database initialization
+Then open another terminal in root of project and run:
 
-* How to run the test suite
+```bash
+tail -f log/datadog.log
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Then open another terminal in root of project and within Rails console run:
 
-* Deployment instructions
-
-* ...
+```ruby
+10.times {|n| Resque.enqueue FooJob, {foo: 'bar-%0d' % n} }
+```
